@@ -1,8 +1,9 @@
-package com.example.myapplication
+package com.example.myapplication.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.R
 import com.example.myapplication.model.Appointment
 import kotlinx.android.synthetic.main.activity_appointments.*
 import java.util.ArrayList

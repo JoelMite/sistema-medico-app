@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 
+// Object Declaration -- Es independiente y esta en otra clase
 object PreferenceHelper {
 
     fun defaultPrefs(context: Context): SharedPreferences

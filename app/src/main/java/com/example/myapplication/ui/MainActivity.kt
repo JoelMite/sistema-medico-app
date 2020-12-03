@@ -1,13 +1,14 @@
-package com.example.myapplication
+package com.example.myapplication.ui
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.myapplication.PreferenceHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import com.example.myapplication.PreferenceHelper.get
 import com.example.myapplication.PreferenceHelper.set
+import com.example.myapplication.R
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
