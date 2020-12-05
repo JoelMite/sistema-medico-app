@@ -1,13 +1,12 @@
 package com.example.myapplication.ui
 
+import com.example.myapplication.model.Doctor
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.RadioButton
-import android.widget.Toast
+import android.widget.*
 import com.example.myapplication.R
 import com.example.myapplication.io.ApiService
 import com.example.myapplication.model.Specialty
@@ -70,6 +69,7 @@ class CreateAppointmentActivity : AppCompatActivity() {
         }
 
         loadSpecialties()
+        listenSpecialtyChanges()
 
         val doctorsOptions = arrayOf("Doctor A", "Doctor B", "Doctor C")
         spinnerDoctors.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, doctorsOptions)
@@ -83,12 +83,16 @@ class CreateAppointmentActivity : AppCompatActivity() {
                 if (response.isSuccessful){ // Si el codigo de respuesta es entre 200 .. 300 accedemos a la respuesta
                     val specialties = response.body() // ArrayList de Especialidades (Objetos)
 
-                    val specialtyOptions = ArrayList<String>() // ArrayList de Cadenas
-                    specialties?.forEach{
-                        specialtyOptions.add(it.name) // Tomamos la variable nombre de cada especialidad y guardamos en otro array en este caso specialtyOptions
-                    }
+//                    val specialtyOptions = ArrayList<String>() // ArrayList de Cadenas
+//                    specialties?.forEach{
+//                        specialtyOptions.add(it.name) // Tomamos la variable nombre de cada especialidad y guardamos en otro array en este caso specialtyOptions
+//                    }
 
-                    spinnerSpecialties.adapter = ArrayAdapter<String>(this@CreateAppointmentActivity, android.R.layout.simple_list_item_1, specialtyOptions)
+                    spinnerSpecialties.adapter = specialties?.let {
+                        ArrayAdapter<Specialty>(this@CreateAppointmentActivity, android.R.layout.simple_list_item_1,
+                            it
+                        )
+                    }
                 }
             }
 
@@ -99,6 +103,43 @@ class CreateAppointmentActivity : AppCompatActivity() {
 
         })
 
+    }
+
+    private fun listenSpecialtyChanges(){
+        spinnerSpecialties.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(adapter: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val specialty = adapter?.getItemAtPosition(position) as Specialty
+                //Toast.makeText(this@CreateAppointmentActivity, "id: ${specialty.id}", Toast.LENGTH_SHORT).show()
+                loadDoctors(specialty.id)
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
+    }
+
+    private fun loadDoctors(specialtyId: Int){
+        val call = apiService.getDoctors(specialtyId)
+        call.enqueue(object :Callback<ArrayList<Doctor>> {
+            override fun onResponse(call: Call<ArrayList<Doctor>>, response: Response<ArrayList<Doctor>>) {
+                if (response.isSuccessful){ // Si el codigo de respuesta es entre 200 .. 300 accedemos a la respuesta
+                    val doctors = response.body() // ArrayList de Especialidades (Objetos)
+
+                    spinnerDoctors.adapter = doctors?.let {
+                        ArrayAdapter<Doctor>(this@CreateAppointmentActivity, android.R.layout.simple_list_item_1,
+                            it
+                        )
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ArrayList<Doctor>>, t: Throwable) {
+                Toast.makeText(this@CreateAppointmentActivity, getString(R.string.error_loading_doctors), Toast.LENGTH_SHORT).show()
+                finish() // Finaliza el activity anterior
+            }
+        })
     }
 
     private fun showAppointmentDataToConfirm(){
