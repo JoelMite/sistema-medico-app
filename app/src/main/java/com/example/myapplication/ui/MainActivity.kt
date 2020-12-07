@@ -9,9 +9,19 @@ import kotlinx.android.synthetic.main.activity_main.*
 import com.example.myapplication.PreferenceHelper.get
 import com.example.myapplication.PreferenceHelper.set
 import com.example.myapplication.R
+import com.example.myapplication.io.ApiService
+import com.example.myapplication.io.response.LoginResponse
+import com.example.myapplication.util.toast
 import com.google.android.material.snackbar.Snackbar
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
+
+    private val apiService: ApiService by lazy{
+        ApiService.create()
+    }
 
     // Variable Durmiente
     private val snackBar by lazy{
@@ -33,13 +43,12 @@ class MainActivity : AppCompatActivity() {
         */
 
         val preferences = PreferenceHelper.defaultPrefs(this)
-        if (preferences["session", false])
+        if (preferences["access_token", ""].contains(".")) // Si el token jwt al menos existe un punto pasara a la actividad menu, sino quiere decir que es cadena vacia y por lo tanto no va a pasar
             goToMenuActivity()
 
         btnLogin.setOnClickListener {
             // validates
-            createSessionPreference()
-            goToMenuActivity()
+            performLogin()
         }
 
         tvGoToRegister.setOnClickListener {
@@ -50,7 +59,44 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun createSessionPreference(){
+    private fun performLogin(){
+
+        val email = etEmail.text.toString()
+        val password = etPassword.text.toString()
+
+        if (email.trim().isEmpty() || password.trim().isEmpty()){
+            toast(getString(R.string.error_empty_credentials))
+            return
+        }
+
+        val call = apiService.postLogin(email, password)
+        call.enqueue(object: Callback<LoginResponse>{
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if (response.isSuccessful){
+                    val loginResponse = response.body()
+                    if (loginResponse == null){
+                        toast(getString(R.string.error_login_response))
+                        return
+                    }
+                    if (loginResponse.success){
+                        createSessionPreference(loginResponse.access_token)
+                        toast("Bienvenido")
+                        goToMenuActivity()
+                    }else{
+                        toast(getString(R.string.error_invalid_credentials))
+                    }
+                } else{
+                    toast(getString(R.string.error_login_response))
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                toast(t.localizedMessage)
+            }
+        })
+    }
+
+    private fun createSessionPreference(access_token: String){
         /*
         val preferences =  getSharedPreferences("general", Context.MODE_PRIVATE)
         val editor = preferences.edit()
@@ -59,7 +105,7 @@ class MainActivity : AppCompatActivity() {
          */
 
         val preferences = PreferenceHelper.defaultPrefs(this)
-        preferences["session"] = true
+        preferences["access_token"] = access_token
     }
 
     private fun goToMenuActivity(){

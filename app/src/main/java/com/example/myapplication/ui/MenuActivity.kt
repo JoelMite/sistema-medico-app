@@ -5,10 +5,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myapplication.PreferenceHelper
 import com.example.myapplication.PreferenceHelper.set
+import com.example.myapplication.PreferenceHelper.get
 import com.example.myapplication.R
+import com.example.myapplication.io.ApiService
+import com.example.myapplication.util.toast
 import kotlinx.android.synthetic.main.activity_menu.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MenuActivity : AppCompatActivity() {
+
+    private val apiService by lazy{
+        ApiService.create()
+    }
+
+    private val preferences by lazy{
+        PreferenceHelper.defaultPrefs(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
@@ -24,11 +39,30 @@ class MenuActivity : AppCompatActivity() {
         }
 
         btnLogout.setOnClickListener{
-            clearSessionPreference()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            performLogout()
+//            clearSessionPreference()
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//            finish()
         }
+    }
+
+    private fun performLogout(){
+        val access_token = preferences["access_token", ""]
+        val call = apiService.postLogout("Bearer $access_token")
+        call.enqueue(object: Callback<Void>{
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                clearSessionPreference()
+
+                val intent = Intent(this@MenuActivity, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                toast(t.localizedMessage)
+            }
+        })
     }
 
     private fun clearSessionPreference(){
@@ -38,8 +72,6 @@ class MenuActivity : AppCompatActivity() {
         editor.putBoolean("session", false)
         editor.apply()
         */
-
-        val preferences = PreferenceHelper.defaultPrefs(this)
-        preferences["session"] = false
+        preferences["access_token"] = ""
     }
 }
