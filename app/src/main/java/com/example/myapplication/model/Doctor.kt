@@ -1,7 +1,7 @@
 package com.example.myapplication.model
 
-data class Doctor (val id: Int, val name: String){
-    override fun toString(): String {
-        return name
-    }
-}
+data class Doctor(
+    val id: Int,
+    val email: String,
+    val persons: Person
+)

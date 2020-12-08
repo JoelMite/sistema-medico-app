@@ -52,6 +52,78 @@
             tools:text="A las 3:00 PM">
         </TextView>
 
+        <FrameLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:text="Confirmada">
+            </TextView>
+
+            <ImageButton
+                android:id="@+id/ibExpand"
+                android:src="@drawable/ic_expand_more"
+                tools:src="@drawable/ic_expand_less"
+                android:background="@color/white"
+                android:layout_gravity="end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </ImageButton>
+            
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutDetails"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvSpecialty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                tools:text="Medicina Familiar">
+            </TextView>
+
+            <TextView
+                android:id="@+id/tvType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                tools:text="Revision de Examenes Medicos">
+            </TextView>
+
+            <TextView
+                android:id="@+id/tvCreatedAt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                tools:text="Esta cita se registro el día 2020-12-08 con la siguiente descripción">
+            </TextView>
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="24dp"
+                tools:text="Me duele mucho la cabeza y el cuerpo">
+            </TextView>
+
+        </LinearLayout>
+
+
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

@@ -1,6 +1,7 @@
 package com.example.myapplication.io
 
 import com.example.myapplication.io.response.LoginResponse
+import com.example.myapplication.model.Appointment
 import com.example.myapplication.model.Doctor
 import com.example.myapplication.model.Schedule
 import com.example.myapplication.model.Specialty
@@ -27,6 +28,9 @@ interface ApiService {
 
     @POST("logout")
     fun postLogout(@Header("Authorization") authHeader: String): Call<Void>
+
+    @GET("appointments")
+    fun getAppointments(@Header("Authorization") authHeader: String): Call<ArrayList<Appointment>>
 
     //Object Declaration -- Esta al interior de una interface en este caso
     companion object Factory{
