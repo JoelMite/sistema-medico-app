@@ -1,8 +1,10 @@
 package com.example.myapplication.io
 
 import com.example.myapplication.io.response.LoginResponse
+import com.example.myapplication.io.response.SimpleResponse
 import com.example.myapplication.model.Appointment
 import com.example.myapplication.model.Doctor
+import com.example.myapplication.model.Person
 import com.example.myapplication.model.Schedule
 import com.example.myapplication.model.Specialty
 import okhttp3.OkHttpClient
@@ -31,6 +33,17 @@ interface ApiService {
 
     @GET("appointments")
     fun getAppointments(@Header("Authorization") authHeader: String): Call<ArrayList<Appointment>>
+
+    @POST("appointments")
+    @Headers("Accept: application/json")
+    fun storeAppointments(@Header("Authorization") authHeader: String,
+                          @Query("description") description: String,
+                          @Query("specialty_id") specialtyId: Int,
+                          @Query("doctor_id") doctorId: Int,
+                          @Query("schedule_date") scheduleDate: String,
+                          @Query("schedule_time") scheduleTime: String,
+                          @Query("type") type: String
+                         ): Call<SimpleResponse>
 
     //Object Declaration -- Esta al interior de una interface en este caso
     companion object Factory{
