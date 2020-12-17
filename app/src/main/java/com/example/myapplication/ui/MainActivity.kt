@@ -32,6 +32,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+//            // Get new FCM registration token
+//            val token = task.result
+//            Log.d("FCMService", token)
+//        }
+
         // Preferencia de datos
         // shared preferences cuando queremos guardar datos puntuales
         // sqlite cuando queremos guardar registros traidas de una base de datos que muy rara vez cambian
@@ -81,7 +87,7 @@ class MainActivity : AppCompatActivity() {
                     if (loginResponse.success){
                         createSessionPreference(loginResponse.access_token)
                         toast("Bienvenido")
-                        goToMenuActivity()
+                        goToMenuActivity(true)
                     }else{
                         toast(getString(R.string.error_invalid_credentials))
                     }
@@ -108,8 +114,13 @@ class MainActivity : AppCompatActivity() {
         preferences["access_token"] = access_token
     }
 
-    private fun goToMenuActivity(){
+    private fun goToMenuActivity(isUserInput: Boolean = false){
         val intent = Intent(this, MenuActivity::class.java)
+
+        if (isUserInput){
+            intent.putExtra("store_token", true) // Pasar un valor de main activity a otro, en este caso a menu activity
+        }
+
         startActivity(intent)
         finish()
     }

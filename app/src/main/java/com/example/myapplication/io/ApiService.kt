@@ -45,6 +45,11 @@ interface ApiService {
                           @Query("type") type: String
                          ): Call<SimpleResponse>
 
+    @POST("fcm/token")
+    fun postToken(@Header("Authorization") authHeader: String,
+                          @Query("device_token") token: String
+    ): Call<Void>
+
     //Object Declaration -- Esta al interior de una interface en este caso
     companion object Factory{
         private const val BASE_URL = "http://192.168.0.111:8000/api/"

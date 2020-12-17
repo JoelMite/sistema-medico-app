@@ -50,4 +50,5 @@
     <string name="item_appointment_created_at">Esta cita se registro el día %1$s con la siguiente descripción</string>
     <string name="create_appointment_success">Cita Registrada Correctamente</string>
     <string name="create_appointment_error">Ocurrió un error inesperado registrando la cita médica</string>
+    <string name="default_notification_channel_id">default_channel</string>
 </resources>
