@@ -13,26 +13,46 @@
     card_view:cardCornerRadius="3dp"
     tools:context=".ui.MenuActivity">
 
-    <LinearLayout
+    <!-- Indicador de estado -->
+    <View
+        android:id="@+id/indicator_appointment_status"
+        android:layout_width="8dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        tools:background="@color/white"/>
+
+    <RelativeLayout
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="6dp">
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/tvAppointmentId"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Cita médica #7">
-        </TextView>
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            tools:text="Cita médica #7" />
+
+        <View
+            android:id="@+id/vertical_separator"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@+id/tvAppointmentId"
+            android:background="#E0E0E0" />
 
         <TextView
             android:id="@+id/tvDoctorName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:gravity="center_horizontal"
             style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_toEndOf="@+id/vertical_separator"
             tools:text="Médico Test">
         </TextView>
 
@@ -41,6 +61,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:layout_alignStart="@+id/tvDoctorName"
+            android:layout_below="@id/tvDoctorName"
             tools:text="Atención el dia 12/12/2020">
         </TextView>
 
@@ -49,13 +71,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:layout_alignStart="@+id/tvScheduledDate"
+            android:layout_below="@id/tvScheduledDate"
             tools:text="A las 3:00 PM">
         </TextView>
 
         <FrameLayout
+            android:id="@+id/frameLayout"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tvScheduledTime"
+            android:layout_below="@id/tvScheduledTime">
 
             <TextView
                 android:id="@+id/tvStatus"
@@ -75,23 +102,28 @@
                 android:layout_height="wrap_content">
 
             </ImageButton>
-            
+
         </FrameLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/linearLayoutDetails"
             android:visibility="gone"
             tools:visibility="visible"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/frameLayout"
+            android:layout_below="@id/frameLayout">
 
             <TextView
                 android:id="@+id/tvSpecialty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                tools:text="Medicina Familiar">
+                android:layout_alignStart="@+id/linearLayoutDetails"
+                android:layout_below="@id/linearLayoutDetails"
+                tools:text="Medicina Familiar"
+                tools:ignore="NotSibling">
             </TextView>
 
             <TextView
@@ -99,6 +131,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
+                android:layout_alignStart="@+id/tvSpecialty"
+                android:layout_below="@id/tvSpecialty"
                 tools:text="Revision de Examenes Medicos">
             </TextView>
 
@@ -107,6 +141,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
+                android:layout_alignStart="@+id/tvType"
+                android:layout_below="@id/tvType"
                 android:layout_marginTop="8dp"
                 tools:text="Esta cita se registro el día 2020-12-08 con la siguiente descripción">
             </TextView>
@@ -117,13 +153,15 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:layout_marginBottom="24dp"
+                android:layout_alignStart="@+id/tvCreatedAt"
+                android:layout_below="@id/tvCreatedAt"
                 tools:text="Me duele mucho la cabeza y el cuerpo">
             </TextView>
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

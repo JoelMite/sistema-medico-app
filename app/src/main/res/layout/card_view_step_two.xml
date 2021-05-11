@@ -51,7 +51,7 @@
 
             <TextView
                 android:id="@+id/tvSelectDoctorAndDate"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/white"
                 android:layout_margin="6dp"
                 android:text="@string/label_select_doctor_and_date"
                 android:layout_width="match_parent"
@@ -59,7 +59,7 @@
 
             <TextView
                 android:id="@+id/tvNoAvailableHours"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/red"
                 android:layout_margin="6dp"
                 android:text="@string/label_not_available_hours"
                 tools:visibility="visible"

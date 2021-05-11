@@ -28,8 +28,10 @@
 
     <include layout="@layout/card_view_step_one" />
 
-    <include layout="@layout/card_view_step_two" />
+    <include layout="@layout/card_view_step_two"
+        android:visibility="gone"/>
 
-    <include layout="@layout/card_view_step_three" />
+    <include layout="@layout/card_view_step_three"
+        android:visibility="gone"/>
 
 </LinearLayout>

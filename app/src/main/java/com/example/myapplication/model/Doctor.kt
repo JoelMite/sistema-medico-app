@@ -5,7 +5,7 @@ data class Doctor(
     val email: String,
     val name: String,
     val lastname: String,
-    val persons: Person
+    val person: Person
 ){
     override fun toString(): String {
         return name
