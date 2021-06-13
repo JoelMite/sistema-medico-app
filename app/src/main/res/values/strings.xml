@@ -52,4 +52,71 @@
     <string name="create_appointment_success">Cita Registrada Correctamente</string>
     <string name="create_appointment_error">Ocurrió un error inesperado registrando la cita médica</string>
     <string name="default_notification_channel_id">default_channel</string>
+    
+    
+    <string name="btn_reminder_medicine">Recordatorio Medicina</string>
+
+    <string name="app_name_reminder">Recordatorio de Medicamentos</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="action_load_sample_data">Cargar Data</string>
+
+    <string name="snackbar_msg_sample_data_loaded">%d elementos cargados&#8230;</string>
+
+    <string name="create_reminder">Crear Recordatorio</string>
+    <string name="edit_reminder">Editar Recordatorio</string>
+    <string name="name">Nombres</string>
+    <string name="type">Tipo</string>
+    <string name="man">Hombre</string>
+    <string name="woman">Mujer</string>
+    <string name="cat">Cat</string>
+    <string name="dog">Dog</string>
+    <string name="medicine_name">Medicina a Administrar.</string>
+    <string name="description">Descripción del tratamiento.</string>
+    <string name="note">Nota Adicional.</string>
+    <string name="select_time">Seleccione la Hora</string>
+    <string name="no_reminders">No existen recordatorios.</string>
+
+    <string name="days">Dias</string>
+    <string name="other">Other</string>
+    <string name="action_delete_data">Borrar Data</string>
+    <string name="undo">Undo</string>
+    <string name="administered">Medicina Suministrada</string>
+    <string name="time">Hora</string>
+    <string name="action_delete_reminder">Eliminar Recordatorio</string>
+    <string name="unknown_error">Ha ocurrido un error.</string>
+    <string name="nothing_to_delete">No hay nada que borrar.</string>
+    <string name="name_required">El nombre es un campo obligatorio.</string>
+    <string name="type_required">El tipo es un campo obligatorio.</string>
+    <string name="medicine_required">La medicina es un campo obligatorio.</string>
+    <string name="days_required">Debes elegir al menos un día.</string>
+    <string name="time_required">La hora es un campo obligatorio.</string>
+    <string name="save_failed">El recordatorio no se creo. Intente otra vez.</string>
+    <string name="update_failed">No se pudo actualizar el recordatorio.</string>
+    <string name="delete_failed">No se pudo eliminar el recordatorio.</string>
+    <string name="sample_data_loaded_title">Data Importada</string>
+    <string name="sample_data_loaded_message">Insertó la data de muestra en la app.</string>
+    <string name="sample_data_loaded_big_text">Ahora hay 4 recordatorios cargados en la base de datos de su dispositivo.</string>
+    <string name="manage_channels">Administrar Canales</string>
+    <string name="sample_data_deleted_title">Data Eliminada</string>
+    <string name="sample_data_deleted_message">Se han eliminado los datos de la aplicación.</string>
+    <string name="sample_data_deleted_big_text">Los registros de la base de datos se han eliminado para todos los recordatorios.</string>
+    <string name="group_notification_for">This is the %s notification group.</string>
+    <string name="desc_required">La descripción es un campo requerido</string>
+    <string name="action_notify_administer_medication">com.example.myapplication.action.ADMINISTER_MEDICATION</string>
+    <string name="created_reminder">Recordatorio creado: %s.</string>
+    <string name="deleted_reminder">Recordatorio Eliminado: %s.</string>
+    <string name="updated_reminder">Recordatorio Actualizado: %s.</string>
+    <string name="cant_administer_medicine">No puede suministrar el medicamento antes de tiempo.</string>
+    <string name="administer">Administrar</string>
+    <string name="action_medicine_administered">com.example.myapplication.action.MEDICINE_ADMINISTERED</string>
+    <string-array name="days">
+        <item>Domingo</item>
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miércoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sábado</item>
+    </string-array>
+    
 </resources>

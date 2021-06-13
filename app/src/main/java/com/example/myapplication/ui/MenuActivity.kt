@@ -53,6 +53,12 @@ class MenuActivity : AppCompatActivity() {
 //            startActivity(intent)
 //            finish()
         }
+
+        // Codigo Nuevo para el Reminder
+        btnReminderMedicine.setOnClickListener{
+            val intent = Intent(this, ReminderActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun storeToken(){

@@ -199,6 +199,12 @@ class CreateAppointmentActivity : AppCompatActivity() {
                     getString(R.string.error_loading_hours),
                     Toast.LENGTH_SHORT
                 ).show()
+                tvSelectDoctorAndDate.visibility = View.GONE
+                selectedTimeRadioBtn = null
+                radioGroupLeft.removeAllViews()
+                radioGroupRight.removeAllViews()
+                tvNoAvailableHours.visibility = View.VISIBLE
+
             }
         })
         // Toast.makeText(this, "doctor: $doctorId, date: $date", Toast.LENGTH_SHORT).show()

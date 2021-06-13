@@ -4,9 +4,12 @@
     package="com.example.myapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Need to receive a broadcast when the system reboots -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
+        android:name=".ui.ReminderMedicine"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -14,6 +17,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
+        <activity
+            android:name=".ui.ReminderActivity"
+            android:parentActivityName=".ui.MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ui.AppointmentsActivity"
             android:parentActivityName=".ui.MenuActivity" />
@@ -41,6 +48,20 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <!-- Global Broadcast Receiver -->
+        <receiver android:name=".ui.AppGlobalReceiver"/>
+
+        <!-- For retrieving the broadcast sent by the system when the alarm is triggered -->
+        <receiver android:name=".notif.AlarmReceiver" />
+
+        <!-- For listening to device reboot to reschedule alarms -->
+        <receiver android:name=".notif.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
